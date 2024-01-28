@@ -1,0 +1,40 @@
+<html>
+    <script>
+        function emp(id,name,salary){
+            this.id=id;
+            this.name=name;
+            this.salary=salary;
+            this.changeSalary=changeSalary;
+            function changeSalary(otherSalary){
+                this.salary=otherSalary;
+            }
+        }
+        function newSalary(employee,otherSalary){
+            employee.salary=otherSalary;
+        }
+        var emp1={id:101,name:"Dante",salary:10000};
+        var emp2=new emp(102,"Vergil",10000);
+        var emp3=new Object();
+        emp3.id=103;
+        emp3.name="Nero";
+        emp3.salary=10000;
+        document.writeln(emp1.id+" "+emp1.name+" "+emp1.salary+"<br>");
+        document.writeln(emp2.id+" "+emp2.name+" "+emp2.salary+"<br>");
+        document.writeln(emp3.id+" "+emp3.name+" "+emp3.salary+"<br>");
+        newSalary(emp1,30000);
+        emp2.changeSalary(25000);
+        //emp3.changeSalary(20000);  This wont run for objects created 
+                                    //aside from the object constructor
+        newSalary(emp2,50000);
+        newSalary(emp3,20000);
+        document.writeln(emp1.id+" "+emp1.name+" "+emp1.salary+"<br>");
+        document.writeln(emp2.id+" "+emp2.name+" "+emp2.salary+"<br>");
+        document.writeln(emp3.id+" "+emp3.name+" "+emp3.salary+"<br>");
+        for(x in emp1){
+            document.writeln(x+" : "+emp1[x]+"<br>");
+        }
+    </script>
+    <body>
+        <br><h1>Learning Objects in Javascripts</h1>
+    </body>
+</html>
