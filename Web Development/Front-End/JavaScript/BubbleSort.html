@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="BubbleSort.js" defer></script>
+        <style>
+            .array-display{
+                display: block;
+                margin-top:30px;
+                margin-bottom:30px;
+            }
+            .number-input{
+                height:30px;
+                width: 60px;
+                margin-right : 5px;
+                font-size:20px;
+                text-align:center;
+            }
+            .btn-input{
+                height:35px;
+                width:40px;
+                color:white;
+                background-color:rgb(244, 37, 34);
+                border-radius:.5em;
+                border:none;
+            }
+            .btn-output{
+                height:35px;
+                color:white;
+                background-color:rgb(29, 161, 255);
+                border:none;
+                border-radius:.5em;
+                width:fit-content;
+            }
+            .btn-input,.btn-output:hover{
+                cursor:pointer;
+            }
+            .input-area{
+                display: flex;
+            }
+            .input-section,.output-section{
+                padding: 1em;
+                margin:10px;
+                max-width:400px;
+                border:1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1><u>Bubble Sort using JavaScript</u></h1>
+        <section class="input-section">
+            <div class="input-area">
+                <input class="number-input" type="number">
+                <button class="btn-input" type="button">Add</button>
+            </div>
+            <div class="array-display">
+                <span>Array :  </span>
+                <span class="array-input-list"></span>
+            </div>
+        </section>
+        <section class="output-section">
+            <button class="btn-output" type="button">Sort_Array</button>
+            <div class="array-display">
+                <span>Sorted Array :  </span>
+                <span class="array-output-list"></span>
+            </div>
+        </section>
+    </body>
+</html>
