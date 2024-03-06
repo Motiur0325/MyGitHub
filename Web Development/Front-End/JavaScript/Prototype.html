@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function Employee(Name,Salary){
+                this.Name=Name;
+                this.Salary=Salary;
+                Employee.prototype.show=function(){
+                    document.writeln("Name :  "+this.Name+"<br>"+"Salary :  "+this.Salary+"<br>");
+                }
+                this.display=()=>{
+                    document.writeln("Name :  "+Name+"<br>"+"Salary :  "+Salary+"<br>");
+                }
+            }
+            var emp1=new Employee("Dante",20000);
+            var emp2=new Employee("Vergil",30000);
+            emp1.show();
+            emp2.show();
+            emp1.display();
+            emp2.display();
+        </script>
+    </head>
+</html>
