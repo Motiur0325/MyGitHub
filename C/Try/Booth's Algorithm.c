@@ -1,22 +1,15 @@
 #include<stdio.h>
 
-void step(int *ac,int *qr){
-	int a=*ac%10;
-	int q=*qr%10;
-	*a=*a>>1;
-	
+int AC=0,SC=4,QN1=0;
+
+int Booth_Algo(int m,int n){
+	int BR=m,QR=n;
+	if 
 }
 void main(){
-	int ac=0000;
-	int br=0111;
-	int qr=0011;
-	int Br=1001;
-	int sc=4;
-	while(sc!=0){
-		int qn=qr%10;
-		int Qn=0;
-		if((qn==0&&Qn==0)||(qn==1&&Qn==1)){
-			step(&ac,&qr);
-		}
-	}
+	int m,n;
+	printf("Enter the two numbers :  ");
+	scanf("%d%d",&m,&n);
+	int prod=Booth_Algo(m,n);
+	printf("Product is :  %d",prod);
 }
