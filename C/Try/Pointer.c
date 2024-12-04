@@ -17,7 +17,7 @@ void main(){
 //	printf("x : %d\ty : %d\tz : %d\t",x,y,z);
 	int x=10;
 	int *p=&x;
-	printf("%d\t%d\t%d\t%d",*p,p,&x,&p);
+	printf("%d\t%d\t%d\t%d\n",*p,p,&x,&p);
 	int a[]={1,2,3};
 	dis(a);
 }

@@ -7,7 +7,7 @@ int main(){
 	cout<<"Enter the size of array :  ";cin>>size;
 	arr=new int[size];
 	cout<<"Memory Allocated :  "<<sizeof(*arr/arr[0]);
-	delete []arr;
+	delete arr;
 	cout<<"\nMemory Allocated :  "<<sizeof(*arr/arr[0]);
 	return 0;
 }
