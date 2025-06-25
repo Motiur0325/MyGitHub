@@ -1,0 +1,25 @@
+package com.zosh.services;
+
+import java.util.List;
+
+import com.zosh.models.User;
+
+public interface UserService {
+	
+	public User registerUser(User user);
+	
+	public List<User> showUser();
+	
+	public User findUserById(Integer userId) throws Exception;
+	
+	public User findUserByEmail(String email);
+	
+	public void followUser(Integer followerId,Integer followId) throws Exception;
+	
+	public User updateUser(String jwt,User user) throws Exception;
+	
+	public List<User> searchUser(String query);
+	
+	public User findUserByToken(String jwt);
+	
+}

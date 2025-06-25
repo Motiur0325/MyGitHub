@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript">
+function myFact(n)
+{
+	var i,f=1;
+	for(i=1;i<=n;i++){
+		f=f*i;
+	}
+	return f;
+}
+function printFact()
+{
+	var fact;
+	fact = myFact(6);
+	document.write("Factorial : ",fact);
+}
+</script>
+</head>
+<body>
+<form>
+<input type="button" onclick="printFact()" value="Factorial"></input>
+</form>
+</body>
+</html>

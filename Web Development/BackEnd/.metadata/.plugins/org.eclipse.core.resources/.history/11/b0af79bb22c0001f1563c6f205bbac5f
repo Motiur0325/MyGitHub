@@ -1,0 +1,9 @@
+package com.zosh.services;
+
+import com.zosh.models.Post;
+
+public interface PostService {
+
+	Post createnewPost(Post post,Integer userId) throws Exception;
+	
+}

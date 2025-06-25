@@ -1,0 +1,36 @@
+package com.zosh.services;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.zosh.models.Story;
+
+public class StoryServiceImplementation implements StoryService{
+
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	S
+	
+	@Override
+	public Story createStory(Story story, Integer id) throws Exception {
+		
+		Story newStory=new Story();
+		newStory.setCaption(story.getCaption());
+		newStory.setImage(story.getImage());
+		newStory.setUser(userService.findUserById(id));
+		newStory.setCreatedAt(LocalDateTime.now());
+		
+		return new;
+	}
+
+	@Override
+	public List<Story> findStoryByUserId(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

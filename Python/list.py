@@ -1,0 +1,10 @@
+myList=['Lamborghini','Bugatti','Ford','Aston Martin','Lexu']
+myList.append('Hello')
+myList.insert(0,'Bye')
+print(len(myList))
+print(myList)
+myList.remove('Ford')
+myList.pop()
+print(myList)
+myList.clear()
+print(myList)

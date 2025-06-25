@@ -1,0 +1,7 @@
+package com.zosh.config;
+
+public class JWT_Constants {
+	
+	public static String JWT_HEADER="Authorization";
+
+}

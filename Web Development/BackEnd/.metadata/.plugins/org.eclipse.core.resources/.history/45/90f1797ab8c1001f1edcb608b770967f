@@ -1,0 +1,46 @@
+package com.zosh.services;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zosh.models.Chat;
+import com.zosh.models.Messages;
+import com.zosh.models.User;
+import com.zosh.repository.MessageRepository;
+
+@Service
+public class MessageServiceImplementation implements MessageService{
+
+	@Autowired
+	MessageRepository messageRepository;
+	
+	@Autowired
+	ChatService chatService;
+
+	@Override
+	public Messages createMessage(User user, Integer chatId, Messages msg) throws Exception {
+		
+		Messages message=new Messages();
+		
+		Chat chat=chatService.findChatById(chatId);
+		
+		message.setChat(chat);
+		message.setContent(msg.getContent());
+		message.setImage(msg.getImage());
+		message.setTimeStamp(LocalDateTime.now());
+		message.setUser(user);
+		
+		return messageRepository.save(message);
+	}
+
+	@Override
+	public List<Messages> findChatMessages(Integer chatId) throws Exception {
+		
+		Chat chat=chatService.findChatById(chatId);
+		return messageRepository.findByChatId(chatId);
+	}
+	
+}

@@ -1,0 +1,14 @@
+package com.zosh.services;
+
+import java.util.List;
+
+import com.zosh.models.Chat;
+import com.zosh.models.Messages;
+
+public interface MessageService {
+
+	public Messages createMessage(User user,Integer chatId,Messages msg);
+	
+	public List<Messages> findChatMessages(Integer chatId);
+	
+}

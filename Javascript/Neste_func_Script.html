@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript">
+function hypo(p,b){
+	function square(x){
+		return x*x;
+	}
+	return Math.sqrt(square(p)+square(b));
+}
+function printHypo(){
+	var h;
+	h=hypo(1,1);
+	document.write("Hypotenuese :  ",h);
+}
+</script>
+</head>
+<body>
+<input type="button" onclick="printHypo()" value="Hypotenuse"></input>
+</body>
+</html>

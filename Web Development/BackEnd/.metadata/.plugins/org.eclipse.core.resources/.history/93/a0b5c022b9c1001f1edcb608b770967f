@@ -1,0 +1,19 @@
+package com.zosh.controller;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.zosh.models.Messages;
+
+@RestController
+public class MessageController {
+
+	@PostMapping("/api/messages/chat/{chatId}")
+	public Messages createMessageHandler(@RequestBody Messages msg) {
+		
+		
+		
+	}
+	
+}

@@ -1,0 +1,73 @@
+package com.zosh.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zosh.models.User;
+import com.zosh.repository.UserRepository;
+
+@Service
+public class UserServiceImplementation implements UserService{
+
+	@Autowired
+	UserRepository userRepository;
+	
+	@Override
+	public User registerUser(User user) {
+		
+		User newUser=new User();
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
+		newUser.setEmail(user.getEmail());
+		newUser.setPassword(user.getPassword());
+		newUser.setId(user.getId());
+		userRepository.save(newUser);
+		return newUser;
+
+	}
+
+	@Override
+	public User findUserById(Integer userId) throws Exception {
+		
+		Optional<User> user=userRepository.findById(userId);
+		if(user.isPresent()) {
+			return user.get();
+		}
+		throw new Exception("User doesn't exist with user id :  "+userId);
+		
+	}
+
+	@Override
+	public User findUserByEmail(String email) {
+		
+		User findEmail=userRepository.findByEmail(email);
+		return findEmail;
+		
+	}
+
+	@Override
+	public User followUser(Integer followerId, Integer followId) throws Exception {
+		
+		User follower=findUserById(followerId);
+		User follows=findUserById(followId);
+		return null;
+	}
+
+	@Override
+	public User updateUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> searchUser(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+}

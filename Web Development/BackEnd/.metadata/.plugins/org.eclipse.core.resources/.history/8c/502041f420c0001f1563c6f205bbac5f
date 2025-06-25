@@ -1,0 +1,5 @@
+package com.zosh.services;
+
+public class PostServiceImplementation {
+
+}

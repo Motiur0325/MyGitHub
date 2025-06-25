@@ -1,0 +1,16 @@
+package com.zosh.services;
+
+import java.util.List;
+
+import com.zosh.models.Reels;
+import com.zosh.models.User;
+
+public interface ReelsService {
+	
+	public Reels createReels(Reels reels,User user);
+	
+	public List<Reels> findReelsByUserId(Integer userId) throws Exception;
+	
+	public List<Reels> findAllReels();
+	
+}

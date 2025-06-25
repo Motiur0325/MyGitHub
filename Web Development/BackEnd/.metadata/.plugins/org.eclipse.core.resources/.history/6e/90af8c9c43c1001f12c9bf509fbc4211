@@ -1,0 +1,13 @@
+package com.zosh.services;
+
+import java.util.List;
+
+import com.zosh.models.Story;
+
+public interface StoryService {
+
+	public Story createStory(Story story,Integer id) throws Exception;
+	
+	public List<Story> findStoryByUserId(Integer id);
+	
+}

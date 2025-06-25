@@ -1,0 +1,92 @@
+package com.zosh.controller;
+
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RestController;
+
+import com.zosh.models.User;
+import com.zosh.repository.UserRepository;
+
+@RestController
+public class UserController {
+
+	@Autowired
+	UserRepository userRepository;
+	
+	@PostMapping("/users")
+	public User createUser(@RequestBody User user) {
+		
+//		User user1=new User(1,"Stefan","Salvatore","stefan@tvd.com","hellostefan");
+//		User user2=new User(2,"Damon","Salvatore","damon@tvd.com","hellodamon");
+//		users.add(user1);
+//		users.add(user2);
+		User newUser=new User();
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
+		newUser.setEmail(user.getEmail());
+		newUser.setPassword(user.getPassword());
+		newUser.setId(user.getId());
+		userRepository.save(newUser);
+		return newUser;
+		
+	}
+	
+	@GetMapping("/users")
+	public List<User> getUsers() {
+		
+		List<User> users=userRepository.findAll();
+		return users;
+		
+	}
+//	
+//	@GetMapping("/users/{userId}")
+//	public User getUserById(@PathVariable("userId")Integer id) {
+//		
+////		User user1=new User(1,"Stefan","Salvatore","stefan@tvd.com","hellostefan");
+////		user1.setId(id);
+////		return user1;
+//		for(User user:users) {
+//			if(user.getId()==id)return user;
+//		}
+//		return null;
+//		
+//	}
+//	
+//	@PutMapping("/users/{userId}")
+//	public void editUser(@PathVariable("userId")Integer id,@RequestBody User user) {
+//		
+//		User oldUser=getUserById(id);
+//		if(oldUser==null)return;
+//		if(user.getId()!=null) {
+//			oldUser.setId(user.getId());
+//		}
+//		if(user.getFirstName()!=null) {
+//			oldUser.setFirstName(user.getFirstName());
+//		}
+//		if(user.getLastName()!=null) {
+//			oldUser.setLastName(user.getLastName());
+//		}
+//		if(user.getEmail()!=null) {
+//			oldUser.setEmail(user.getEmail());
+//		}
+//		if(user.getPassword()!=null) {
+//			oldUser.setPassword(user.getPassword());
+//		}
+//		
+//	}
+//	
+//	@DeleteMapping("/users/{userId}")
+//	public User deleteUser(@PathVariable("userId") Integer id) {
+//		
+//		User currUser=getUserById(id);
+//		users.remove(currUser);
+//		return currUser;
+//		
+//	}
+	
+}

@@ -1,0 +1,79 @@
+package com.zosh.services;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zosh.models.Comment;
+import com.zosh.models.Post;
+import com.zosh.models.User;
+import com.zosh.repository.CommentRepository;
+import com.zosh.repository.PostRepository;
+
+@Service
+public class CommentServiceImplementation implements CommentService{
+
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	PostService postService;
+	
+	@Autowired
+	PostRepository postRepository;
+	
+	@Autowired
+	CommentRepository commentRepository;
+	
+	@Override
+	public Comment createComment(Comment comment, Integer postId, Integer userId) throws Exception {
+		
+		User user=userService.findUserById(userId);
+		Post post=postService.findPostById(postId);
+		
+		comment.setContent(comment.getContent());
+		comment.setCreatedAt(LocalDateTime.now());
+		comment.setLikes(new ArrayList<>());
+		comment.setUser(user);
+		
+		Comment savedComment=commentRepository.save(comment);
+		
+		post.getComments().add(savedComment);
+		postRepository.save(post);
+		
+		return savedComment;
+		
+	}
+
+	@Override
+	public Comment findCommentById(Integer commentId) throws Exception {
+		
+		Optional<Comment> comment=commentRepository.findById(commentId);
+		
+		if(comment.isEmpty()) {
+			throw new Exception("Comment doesn't exist with the following comment id :  "+commentId);
+		}
+		return comment.get();
+		
+	}
+
+	@Override
+	public Comment likeComment(Integer commentId, Integer userId) throws Exception {
+		
+		User user=userService.findUserById(userId);
+		Comment comment=findCommentById(commentId);
+		
+		if(comment.getLikes().contains(user)) {
+			comment.getLikes().remove(user);
+		}else {
+			comment.getLikes().add(user);
+		}
+		
+		return commentRepository.save(comment);
+		
+	}
+
+}

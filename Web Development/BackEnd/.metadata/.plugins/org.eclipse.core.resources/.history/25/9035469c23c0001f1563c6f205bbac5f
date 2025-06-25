@@ -1,0 +1,82 @@
+package com.zosh.services;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zosh.models.Post;
+import com.zosh.models.User;
+import com.zosh.repository.PostRepository;
+
+@Service
+public class PostServiceImplementation implements PostService{
+
+	@Autowired
+	PostRepository postRepository;
+	
+	@Autowired
+	UserService userService;
+	
+	@Override
+	public Post createnewPost(Post post, Integer userId) throws Exception {
+		
+		User user=userService.findUserById(userId);
+		Post newPost=new Post();
+		newPost.setCaption(post.getCaption());
+		newPost.setImage(post.getImage());
+//		newPost.setCreatedAt(new LocalDateTime());
+		newPost.setVideo(post.getVideo());
+		newPost.setUser(user);
+		return null;
+	}
+
+	@Override
+	public String deletePost(Integer postId, Integer userId) throws Exception {
+		
+		Post post=findPostById(postId);
+		User user=userService.findUserById(userId);
+		if(user.getId()!=post.getUser().getId()) {
+			throw new Exception("Can't delete the Post !");
+		}
+		postRepository.delete(post);
+		return "Post deleted Successfully";
+	}
+
+	@Override
+	public List<User> findPostByUserId(Integer userId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Post findPostById(Integer postId) throws Exception {
+		
+		Optional<Post> post=postRepository.findById(postId);
+		if(post.isEmpty()) {
+			throw new Exception("Invalid Post Id :  "+postId);
+		}
+		return post.get();
+	}
+
+	@Override
+	public List<Post> findAllPosts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> savedPosts(Integer postId, User userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Post likePost(Integer postId, Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

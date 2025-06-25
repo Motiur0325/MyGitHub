@@ -1,0 +1,43 @@
+package com.zosh.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.zosh.models.Chat;
+import com.zosh.request.CreateChatRequest;
+import com.zosh.services.ChatService;
+import com.zosh.services.UserService;
+
+@RestController
+public class ChatController {
+
+	@Autowired
+	ChatService chatService;
+	
+	@Autowired
+	UserService userService;
+	
+	@PostMapping("/api/chats")
+	public Chat createChat(@RequestBody CreateChatRequest chat) {
+		
+		Chat newChat=chatService.createChat(chat.getUser1(),chat.getUser2());
+		
+		return newChat;
+		
+	}
+	
+	@GetMapping("/api/chats")
+	public List<Chat> getUsersChat() {
+		
+		Chat newChat=chatService.createChat(chat.getUser1(),chat.getUser2());
+		
+		return newChat;
+		
+	}
+	
+}

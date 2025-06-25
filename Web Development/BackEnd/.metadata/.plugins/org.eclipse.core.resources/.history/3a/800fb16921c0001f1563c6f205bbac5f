@@ -1,0 +1,62 @@
+package com.zosh.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zosh.models.Post;
+import com.zosh.models.User;
+import com.zosh.repository.PostRepository;
+
+@Service
+public class PostServiceImplementation implements PostService{
+
+	@Autowired
+	PostRepository postRepository;
+	
+	@Override
+	public Post createnewPost(Post post, Integer userId) throws Exception {
+		
+		Post newPost=new Post();
+		newPost.setCaption
+		return null;
+	}
+
+	@Override
+	public String deletePost(Integer postId, User userId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> findPostByUserId(Integer userId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Post findPostById(Integer postId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> findAllPosts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> savedPosts(Integer postId, User userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Post likePost(Integer postId, Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,46 @@
+package com.zosh.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zosh.models.Reels;
+import com.zosh.models.User;
+import com.zosh.repository.ReelsRepository;
+import com.zosh.repository.UserRepository;
+
+@Service
+public class ReelsServiceImplementation implements ReelsService{
+
+	@Autowired
+	ReelsRepository reelsRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Override
+	public Reels createReels(Reels reels, User user) {
+		
+		Reels newReel=new Reels();
+		newReel.setTitle(reels.getTitle());
+		newReel.setUser(user);
+		newReel.setVideo(reels.getVideo());
+		
+		return reelsRepository.save(newReel);
+		
+	}
+
+	@Override
+	public List<Reels> findReelsByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reels> findAllReels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
