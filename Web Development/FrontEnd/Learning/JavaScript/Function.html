@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <script>
+            var x=10;
+            function change(x){
+                window.x=x;
+            }
+            var pow=new Function("x","y","return Math.pow(x,y)");
+            document.write(pow(2,10)+"<br>");
+            document.writeln(x+"<br>");
+            change(30);
+            document.writeln(x);
+        </script>
+    </body>
+</html>

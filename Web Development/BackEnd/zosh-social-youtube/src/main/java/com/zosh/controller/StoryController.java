@@ -1,0 +1,43 @@
+package com.zosh.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.zosh.models.Story;
+import com.zosh.models.User;
+import com.zosh.services.StoryService;
+import com.zosh.services.UserService;
+
+@RestController
+public class StoryController {
+
+	@Autowired
+	StoryService storyService;
+	
+	@Autowired
+	UserService userService;
+	
+	@PostMapping("/api/story")
+	public Story createStoryHandler(@RequestBody Story story,@RequestHeader("Authorization") String jwt) throws Exception {
+		
+		User user=userService.findUserByToken(jwt);
+		
+		return storyService.createStory(story,user);
+		
+	}
+	
+	@GetMapping("/api/story/user/{userId}")
+	public List<Story> findStoryByUserIdHandler(@PathVariable Integer userId){
+		
+		return storyService.findStoryByUserId(userId);
+		
+	}
+	
+}

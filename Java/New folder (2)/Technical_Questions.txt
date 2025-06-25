@@ -1,0 +1,24 @@
+class MyObject{
+    int x,y;
+    MyObject(int x,int y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        MyObject myObj=new MyObject(10,15);
+        char [] str={'i','n','c','l','u','d','e'};  
+        System.out.println(str.toString());
+        System.out.println(str);
+        System.out.println(myObj.x+" "+myObj.y);
+        System.out.println("A" + "B" + 'A');  
+        System.out.println('A' + 'B'+"A");
+        System.out.println(10+20+"ABC");
+        float x = 12.0f;  
+        float y = 13.4f;  
+        float result = x + y;  
+        System.out.print(result);
+    }
+}

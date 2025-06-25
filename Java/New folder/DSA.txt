@@ -1,0 +1,110 @@
+--------
+Array   |
+--------
+
+KeyPoints----
+
+-> Contiguous Memory Allocation,i.e., a single continuous block of memory is assigned to a process or data structure.
+-> The first Element of the array is the base address and the successive elements' addresses are assigned on equal difference.
+-> Static Memory Allocation, i.e. , the memory is assigned to the array at compile time;
+-> Sorting and Searching is more efficient in arrays usin various algorithms, due to the concept of indexing.
+-> Arrays store data elements of similar data types.
+-> Arrays are used to implement various data structures like trees, graphs, stack, queue,etc.
+
+----------
+LinkList  |
+----------
+
+Key Points----
+
+-> Dynamic Memory Allocation,i.e., Memory is allocated at run time..
+-> No Size Limitation, as memory is allocated when data is inserted.
+-> Insertion & Deletion Operations are easier and efficient than performing the same in arrays.
+-> Abstract Data Type, consists of nodes, each node has a data value and an address to its next node.
+-> Linear, Sequential traversal, thus inefficient for searching as compared to arrays.
+-> Types : Singly, Doubly, Circular.
+-> Requires One Pointer to create the link list but to traverse we need to assign one more.(SinglyLinkList)
+-> Requires One Pointer to create the link list as well as to traverse, since backward traversal is possible.(DoublyLinkList)
+-> Requires One Pointer to create the link list, *last pointing to the first element, can be traversed using *last.(CircularLinkList)
+
+Operations Include-----
+
+->insertAtBeginning
+->insertAtEnd
+->insertAtPos
+->deleteAtBeginning
+->deleteAtEnd
+->deleteAtPos
+->count
+->display
+->search 
+
+Applications-----
+
+-> DSA implementations like tree, graph, stack, queue,etc.
+-> Efficient for operations requiring insertion and deletion frequently.
+
+-------
+Stack  |
+-------
+
+Key Points----
+
+-> Last In First Out or vice versa
+-> Insertion and Deletion on same end
+-> Can be implemented using Array & Linked List both.
+-> ADT with a fixed size, store limited number of elements 
+-> SinglyLinkList is simplest to implement stack using insertAtBegin() Operation.
+
+Operations include-----
+
+->Push : Insert Data at the top of stack and Increment the top pointer
+->Pop : Delete top element, return value and decrement top pointer value
+->Display : Display the elements in stack
+->IsEmpty : returns true if stack is empty or top==-1
+->IsFull : return true if stack is full or top==size-1
+->Top : returns value of the topmost element
+->ChangeTop : change the value of top element
+
+Applications----
+
+->String Reversal
+->UNDO/REDO
+->BackTracking
+->Recursion
+->DFS
+
+-------
+Queue  |
+-------
+
+Key Points----
+
+-> First In First Out
+-> Two Pointers front and rear are used to implement queue;
+-> ADT Can be implemented using arrays or linked lists;
+-> Insertion on rear end, deletion on front end.
+-> front & rear =-1, queue initial condition.
+-> Types : linear, circular, double ended, priority.
+
+Types-----
+
+-> Linear : 	for insertion - rear+=1; queue[rear]=data;
+		for deletion - front+=1;
+		The free space can't be utilised in the queue as incrementing front decreases the size of queue, until the queue is re-initialized.
+		If front=2, rear=4, size=5; then queue will be full with 3 elements only and the 2 free spaces cant be occupied.
+-> Circular :	for insertion - (rear+1)%size; queue[rear]=data;
+		for deletion - (front+1)%size;
+		It overcomes the limitation of a linear queue.
+->DoubleEnded : It has 2-insertion and 2-deletion operations,i.e., Insertion as well as Deletion can pe performed on both rear and front ends.
+-> Priority :	It stores element on a based priority condition.
+		The condition can be that smaller the number higher the priority or vice versa.
+		The FIFO condition is applied to data elements with same priority.
+		Efficient when sorting is a necessity.
+
+Applications----
+
+-> Task Scheduling, CPU Scheduling
+-> BFS
+-> Data Streams, used in IO Buffers
+-> Network Routers and switches to handle data packets.

@@ -1,0 +1,94 @@
+SOLUTION 1 :
+
+int partition(vector<int>&arr,int start,int end){
+	int pivot=end;
+	int i=start,j=end;
+	while(i<j){
+		if(j==pivot){
+			if(arr[i]>arr[pivot]){
+				// int temp=arr[i];
+                // arr[i]=arr[pivot];
+                // arr[pivot]=temp;
+                // cout<<arr[i]<<" "<<arr[pivot]<<endl;
+                swap(arr[i],arr[pivot]);
+				pivot=i;
+			}
+			else{
+				i++;
+			}
+		}
+		if(i==pivot){
+			if(arr[j]<arr[pivot]){
+				// int temp=arr[j];
+                // arr[j]=arr[pivot];
+                // arr[pivot]=temp;
+                // cout<<arr[j]<<" "<<arr[pivot]<<endl;
+                swap(arr[j],arr[pivot]);
+				pivot=j;
+			}
+			else{
+				j--;
+			}
+		}
+	}
+	// printArray(arr,start,i);
+	// printArray(arr,i+1,end+1);
+	return i;
+}
+void Quick(vector<int>&arr,int start,int end){
+	if(start>=end)return;
+	int pivot=partition(arr,start,end);
+	// cout<<"Pivot is :  "<<pivot<<endl;
+	Quick(arr,start,pivot-1);
+	Quick(arr,pivot+1,end);
+}
+vector<int> quickSort(vector<int> arr)
+{
+    Quick(arr,0,arr.size()-1);
+    return arr;
+}
+
+SOLUTION 2:
+
+
+#include <bits/stdc++.h> 
+
+int partition(vector<int> &arr,int start,int end){
+	int*pivot=&arr[end];
+	int i=start,j=end;
+	while(i<j){
+		if(&arr[j]==pivot){
+			if(arr[i]>*pivot){
+				swap(arr[i],*pivot);
+				pivot=&arr[i];
+			}
+			else{
+				i++;
+			}
+		}
+		if(&arr[i]==pivot){
+			if(arr[j]<*pivot){
+				swap(arr[j],*pivot);
+				pivot=&arr[j];
+			}
+			else{
+				j--;
+			}
+		}
+	}
+	// printArray(arr,start,i);
+	// printArray(arr,i+1,end+1);
+	return i;
+}
+void QuickSort(vector<int>& arr,int start,int end){
+	if(start>=end)return;
+	int pivot=partition(arr,start,end);
+	// printf("\nPivot is :  %d\n",arr[pivot]);
+	QuickSort(arr,start,pivot-1);
+	QuickSort(arr,pivot+1,end);
+}
+vector<int> quickSort(vector<int> arr)
+{
+    QuickSort(arr,0,arr.size()-1);
+    return arr;
+}

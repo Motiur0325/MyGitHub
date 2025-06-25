@@ -1,0 +1,11 @@
+git init --- initialize git repo here
+git add . --- stage all files for commit
+git commit -m "Commit" --- Commit all staged files
+git branch -M main --- select branch for push
+git remote add origin https://github.com/Motiur0325/MyGitHub.git --- add remote repo in github
+git push -u origin main --- push the files from latest commit to your github repo
+
+git rm -r --cached . --- remove all tracked files from staging area
+
+git checkout -b master --- switch branches or create one if not exists
+

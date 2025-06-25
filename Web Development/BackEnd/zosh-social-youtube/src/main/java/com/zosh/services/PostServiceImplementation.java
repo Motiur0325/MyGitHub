@@ -1,0 +1,111 @@
+package com.zosh.services;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zosh.exceptions.UserException;
+import com.zosh.models.Post;
+import com.zosh.models.User;
+import com.zosh.repository.PostRepository;
+import com.zosh.repository.UserRepository;
+
+@Service
+public class PostServiceImplementation implements PostService{
+
+	@Autowired
+	PostRepository postRepository;
+	
+	@Autowired
+	UserService userService;
+
+	@Autowired
+	UserRepository userRepository;
+	
+	@Override
+	public Post createnewPost(Post post, Integer userId) throws UserException {
+		
+		User user=userService.findUserById(userId);
+		Post newPost=new Post();
+		newPost.setCaption(post.getCaption());
+		newPost.setImage(post.getImage());
+		newPost.setCreatedAt(LocalDateTime.now());
+		newPost.setVideo(post.getVideo());
+		newPost.setUser(user);
+		newPost.setLikes(new ArrayList<>());
+		newPost.setComments(new ArrayList<>());
+		return postRepository.save(newPost);
+	}
+
+	@Override
+	public String deletePost(Integer postId, Integer userId) throws UserException {
+		
+		Post post=findPostById(postId);
+		User user=userService.findUserById(userId);
+		if(user.getId()!=post.getUser().getId()) {
+			throw new UserException("Can't delete the Post !");
+		}
+		postRepository.delete(post);
+		return "Post deleted Successfully";
+	}
+
+	@Override
+	public List<Post> findPostByUserId(Integer userId){
+		
+		return postRepository.findPostByUserId(userId);
+		
+	}
+
+	@Override
+	public Post findPostById(Integer postId) throws UserException {
+		
+		Optional<Post> post=postRepository.findById(postId);
+		if(post.isEmpty()) {
+			throw new UserException("Invalid Post Id :  "+postId);
+		}
+		return post.get();
+	}
+
+	@Override
+	public List<Post> findAllPosts() {
+		
+		return postRepository.findAll();
+		
+	}
+
+	@Override
+	public User savePost(Integer postId, Integer userId) throws UserException {
+		
+		Post post=findPostById(postId);
+		User user=userService.findUserById(userId);
+		
+		if(user.getSavedPosts().contains(post)) {
+			user.getSavedPosts().remove(post);
+		}else {
+			user.getSavedPosts().add(post);
+		}
+		userRepository.save(user);
+		
+		return user;
+	}
+
+	@Override
+	public Post likePost(Integer postId, Integer userId) throws UserException {
+		
+		Post post=findPostById(postId);
+		User user=userService.findUserById(userId);
+		
+		if(post.getLikes().contains(user)) {
+			post.getLikes().remove(user);
+		}else {
+			post.getLikes().add(user);
+		}
+
+		return postRepository.save(post);
+	}
+
+}

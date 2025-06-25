@@ -1,0 +1,17 @@
+package com.zosh.services;
+
+import java.util.List;
+
+import com.zosh.exceptions.UserException;
+import com.zosh.models.Chat;
+import com.zosh.models.User;
+
+public interface ChatService {
+
+	public Chat createChat(User user1,User user2);
+	
+	public Chat findChatById(Integer id) throws UserException;
+	
+	public List<Chat> findUserChat(User user);
+	
+}

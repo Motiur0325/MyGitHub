@@ -1,0 +1,81 @@
+package com.zosh.services;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zosh.exceptions.UserException;
+import com.zosh.models.Comment;
+import com.zosh.models.Post;
+import com.zosh.models.User;
+import com.zosh.repository.CommentRepository;
+import com.zosh.repository.PostRepository;
+
+@Service
+public class CommentServiceImplementation implements CommentService{
+
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	PostService postService;
+	
+	@Autowired
+	PostRepository postRepository;
+	
+	@Autowired
+	CommentRepository commentRepository;
+	
+	@Override
+	public Comment createComment(Comment comment, Integer postId, Integer userId) throws UserException {
+		
+//		User user=userService.findUserById(userId);
+		Post post=postService.findPostById(postId);
+		Comment newComment=new Comment();
+		
+		newComment.setContent(comment.getContent());
+		newComment.setCreatedAt(LocalDateTime.now());
+		newComment.setLikes(new ArrayList<>());
+		newComment.setUser(userService.findUserById(userId));
+		
+//		Comment savedComment=commentRepository.save(comment);
+		commentRepository.save(newComment);
+		post.getComments().add(newComment);
+		postRepository.save(post);
+		
+		return newComment;
+		
+	}
+
+	@Override
+	public Comment findCommentById(Integer commentId) throws UserException {
+		
+		Optional<Comment> comment=commentRepository.findById(commentId);
+		
+		if(comment.isEmpty()) {
+			throw new UserException("Comment doesn't exist with the following comment id :  "+commentId);
+		}
+		return comment.get();
+		
+	}
+
+	@Override
+	public Comment likeComment(Integer commentId, Integer userId) throws UserException {
+		
+		User user=userService.findUserById(userId);
+		Comment comment=findCommentById(commentId);
+		
+		if(comment.getLikes().contains(user)) {
+			comment.getLikes().remove(user);
+		}else {
+			comment.getLikes().add(user);
+		}
+		
+		return commentRepository.save(comment);
+		
+	}
+
+}

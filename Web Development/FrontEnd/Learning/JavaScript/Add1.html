@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <script>
+            function concatenate(){
+                var FName=document.getElementById("first").value;
+                var LName=document.getElementById("last").value;
+                var FullName=FName+LName;
+                alert("Your Name is :  "+FName+" "+LName);
+            }
+            function conc(x,y){
+                alert("Your Name is : "+x+" "+y);
+            }
+        </script>
+        First Name :  <input type="text" id="first" placeholder="Enter First Name..."/><br>
+        Second Name :  <input type="text" name="LName" id="last" placeholder="Enter Second Name..."/><br>
+        <!-- <input type="button" value="Generate FullName" onclick="concatenate()"/> -->       <!--Alternate Method-->
+        <input type="button" value="Generate FullName" onclick="conc(first.value,last.value)"/>
+    </body>
+</html>

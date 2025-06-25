@@ -1,0 +1,139 @@
+package com.zosh.models;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="users")
+public class User {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+//	@Column(name="FName")
+	private String firstName;
+	
+	private String lastName;
+	
+	private String gender;
+	
+	private String email;
+	
+//	@JsonIgnore
+	private String password;
+	
+	private List<Integer> followers;
+	
+	private List<Integer> followings;
+	
+	@JsonIgnore
+	@ManyToMany
+	private List<Post> savedPosts;
+	
+	public User(){
+		
+	}
+
+//	public User(Integer id, String firstName, String lastName, String gender, String email, String password,
+//			List<Integer> followers, List<Integer> followings) {
+//		
+//		super();
+//		this.id = id;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.gender = gender;
+//		this.email = email;
+//		this.password = password;
+//		this.followers = new ArrayList<>();
+//		this.followings = new ArrayList<>();
+//		
+//	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public List<Post> getSavedPosts() {
+		return savedPosts;
+	}
+
+	public void setSavedPosts(List<Post> savedPosts) {
+		this.savedPosts = savedPosts;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+
+	public List<Integer> getFollowers() {
+		return followers;
+	}
+
+
+
+	public void setFollowers(List<Integer> followers) {
+		this.followers = followers;
+	}
+
+
+
+	public List<Integer> getFollowings() {
+		return followings;
+	}
+
+
+
+	public void setFollowings(List<Integer> followings) {
+		this.followings = followings;
+	}
+
+
+
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
+	
+}

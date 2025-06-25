@@ -1,0 +1,123 @@
+package com.zosh.services;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.zosh.config.JwtProvider;
+import com.zosh.exceptions.UserException;
+import com.zosh.models.User;
+import com.zosh.repository.UserRepository;
+
+@Service
+public class UserServiceImplementation implements UserService{
+
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	@Override
+	public User registerUser(User user) {
+		
+		User newUser=new User();
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
+		newUser.setEmail(user.getEmail());
+		newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+		newUser.setId(user.getId());
+		newUser.setGender(user.getGender());
+		newUser.setFollowers(new ArrayList<>());
+		newUser.setFollowings(new ArrayList<>());
+		newUser.setSavedPosts(new ArrayList<>());
+		userRepository.save(newUser);
+		return newUser;
+
+	}
+
+	@Override
+	public User findUserById(Integer userId) throws UserException {
+		
+		Optional<User> user=userRepository.findById(userId);
+		if(user.isPresent()) {
+			return user.get();
+		}
+		throw new UserException("User doesn't exist with user id :  "+userId);
+		
+	}
+
+	@Override
+	public User findUserByEmail(String email) {
+		
+		return userRepository.findByEmail(email);
+		
+	}
+	
+	@Override
+	public User findUserByToken(String jwt) {
+		
+		String email=JwtProvider.getEmailFromJwtToken(jwt);
+		return userRepository.findByEmail(email);
+		
+	}
+
+	@Override
+	public User followUser(String jwt, Integer followId) throws UserException {
+		
+		User user1=findUserByToken(jwt);
+		User user2=findUserById(followId);
+		user1.getFollowings().add(user2.getId());
+		user2.getFollowers().add(user1.getId());
+		userRepository.save(user1);
+		userRepository.save(user2);
+		return user1;
+		
+	}
+
+	@Override
+	public User updateUser(String jwt,User user) throws UserException {
+		
+		User oldUser=findUserByToken(jwt);
+		
+		if(user.getId()!=null) {
+			oldUser.setId(user.getId());
+		}
+		if(user.getFirstName()!=null) {
+			oldUser.setFirstName(user.getFirstName());
+		}
+		if(user.getLastName()!=null) {
+			oldUser.setLastName(user.getLastName());
+		}
+		if(user.getEmail()!=null) {
+			oldUser.setEmail(user.getEmail());
+		}
+		if(user.getPassword()!=null) {
+			oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
+		}
+		
+		userRepository.save(oldUser);
+		
+		return oldUser;
+		
+	}
+
+	@Override
+	public List<User> searchUser(String query) {
+		
+		return userRepository.searchUser(query);
+		
+	}
+
+	@Override
+	public List<User> showUser() {
+		
+		return userRepository.findAll();
+		
+	}
+	
+}
